@@ -5,3 +5,10 @@
 <div class="text-center">
     <h1 class="display-4">Asset</h1>
 </div>
+
+ @{ 
+    foreach(FactionSystemApp.Models.AssetModel u in ViewBag.users)
+    {
+        @Html.Raw(u.Id +" "+ u.Category +" "+ u.Name +" "+ u.Description +" "+ u.HP +" "+ u.Cost +" "+ u.TechLevel +" "+ u.Type +" "+ u.Attack +" "+ u.Counterattack +" "+ u.Special) 
+    }
+  }

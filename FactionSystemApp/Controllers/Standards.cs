@@ -2,6 +2,12 @@
 {
     public class Standards
     {
+        private static readonly string _conString = @"Data Source=MININT-MBLS0P9\SQLEXPRESS;Initial Catalog=FactionSystem;Integrated Security=True";
+
+        public static string Constring()
+        {
+            return _conString;
+        }
         public static int ClacFacHP(int cunning, int force, int wealth)
         {
             return ClacXpCost(cunning) + ClacXpCost(force) + ClacXpCost(wealth);
