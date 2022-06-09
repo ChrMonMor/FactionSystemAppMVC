@@ -1,14 +1,90 @@
-﻿@{
-    ViewData["Title"] = "Assets";
+﻿@model IEnumerable<FactionSystemApp.Models.AssetModel>
+
+@{
+    ViewData["Title"] = "Asset";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Asset</h1>
-</div>
+<h1>Asset</h1>
 
- @{ 
-    foreach(FactionSystemApp.Models.AssetModel u in ViewBag.users)
-    {
-        @Html.Raw(u.Id +" "+ u.Category +" "+ u.Name +" "+ u.Description +" "+ u.HP +" "+ u.Cost +" "+ u.TechLevel +" "+ u.Type +" "+ u.Attack +" "+ u.Counterattack +" "+ u.Special) 
-    }
-  }
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TechLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Counterattack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Special)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TechLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Attack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Counterattack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Special)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

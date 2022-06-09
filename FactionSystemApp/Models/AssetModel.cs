@@ -32,6 +32,20 @@
             Special = special;
             Location = location;
         }
+        public AssetModel(int id, char category, string name, string description, int hP, int cost, int techLevel, string type, string attack, string counterattack, string special)
+        {
+            Id = id;
+            Category = category;
+            Name = name;
+            Description = description;
+            HP = hP;
+            Cost = cost;
+            TechLevel = techLevel;
+            Type = type;
+            Attack = attack;
+            Counterattack = counterattack;
+            Special = special;
+        }
 
     }
 }
