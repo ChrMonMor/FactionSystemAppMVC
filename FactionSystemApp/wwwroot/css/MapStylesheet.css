@@ -1,14 +1,15 @@
 ﻿
 .mainMap {
+    margin:auto;
     display: flex;
     --s: 100px; /* size  */
     --m: 4px; /* margin */
     --f: calc(var(--s) * 1.732 + 4 * var(--m) - 1px);
+    background-color: darkgray;
 }
 
 .containerMap {
     font-size: 0; /* disable white space between inline block element */
-    background-color: darkgray;
 }
 
     .containerMap div {

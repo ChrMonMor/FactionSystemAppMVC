@@ -24,6 +24,35 @@ namespace FactionSystemApp.Controllers
         public IActionResult Details(int id)
         {
             Models.AssetModel assetDetail = new();
+            string query = "select * From AssetTable where Id = " + id;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Standards.Constring()))
+                {
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    con.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        assetDetail = new Models.AssetModel(Convert.ToInt32(rdr[0]),
+                                                            rdr[1].ToString(),
+                                                            rdr[2].ToString(),
+                                                            rdr[3].ToString(),
+                                                            (int)rdr[4],
+                                                            Convert.ToInt32(rdr[5]),
+                                                            Convert.ToInt32(rdr[6]),
+                                                            rdr[7].ToString(),
+                                                            rdr[8].ToString(),
+                                                            rdr[9].ToString(),
+                                                            rdr[10].ToString());
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             return View("Details", assetDetail);
         }
 
@@ -32,24 +61,35 @@ namespace FactionSystemApp.Controllers
         {
             List<Models.AssetModel> assets = new();
             string query = "select * From AssetTable";
-            using (SqlConnection connection =
-            new SqlConnection(Standards.Constring()))
+            try
             {
-                // Create the Command and Parameter objects.
-                SqlCommand command = new SqlCommand(query, connection);
-
-                // Create and execute the DataReader..
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                using (SqlConnection con = new SqlConnection(Standards.Constring()))
                 {
-                    for (int i = 0; i <= reader.FieldCount - 1; i++) 
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    con.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
                     {
+                        assets.Add(new Models.AssetModel(Convert.ToInt32(rdr[0]),
+                                                         rdr[1].ToString(),
+                                                         rdr[2].ToString(),
+                                                         rdr[3].ToString(),
+                                                         (int)rdr[4],
+                                                         Convert.ToInt32(rdr[5]),
+                                                         Convert.ToInt32(rdr[6]),
+                                                         rdr[7].ToString(),
+                                                         rdr[8].ToString(),
+                                                         rdr[9].ToString(),
+                                                         rdr[10].ToString()));
                     }
-
+                    con.Close();
                 }
             }
-            return assets.ToList();
+            catch (Exception)
+            {
+                throw;
+            }
+            return assets;
         }
     }
 }

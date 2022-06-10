@@ -1,39 +1,20 @@
-﻿@{
+﻿@model FactionSystemApp.Models.MapModel
+
+@{
     ViewData["Title"] = "Map";
 }
 
 <div class="text-center">
     <h1 class="display-4">Maps and Planets</h1>
 </div>
-<div class="mainMap">
+<div class="mainMap" style="width: calc(var(--s) * 1.1547 * @Model.X); height: calc(var(--s) * @Model.Y);">
   <div class="containerMap">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    @for(var y = 0; y < @Model.Y; y++)
+        {
+            @for(var x = 0; x < @Model.X; x++)
+            {
+                <div class="@x,@y">@x,@y</div> 
+            }  
+        }
   </div>
 </div>

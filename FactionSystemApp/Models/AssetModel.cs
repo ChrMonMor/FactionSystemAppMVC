@@ -3,7 +3,7 @@
     public class AssetModel
     {
         public int Id { get; set; }
-        public char Category { get; set; }
+        public string Category { get; set; } = "Category None";
         public string Name { get; set; } = "Asset Name";
         public string Description { get; set; } = "Asset Description";
         public int HP { get; set; }
@@ -17,7 +17,7 @@
 
         // nothing and all
         public AssetModel() { }
-        public AssetModel(int id, char category, string name, string description, int hP, int cost, int techLevel, string type, string attack, string counterattack, string special, PlanetModel location)
+        public AssetModel(int id, string category, string name, string description, int hP, int cost, int techLevel, string type, string attack, string counterattack, string special, PlanetModel location)
         {
             Id = id;
             Category = category;
@@ -32,7 +32,7 @@
             Special = special;
             Location = location;
         }
-        public AssetModel(int id, char category, string name, string description, int hP, int cost, int techLevel, string type, string attack, string counterattack, string special)
+        public AssetModel(int id, string category, string name, string description, int hP, int cost, int techLevel, string type, string attack, string counterattack, string special)
         {
             Id = id;
             Category = category;
