@@ -20,5 +20,13 @@
             Y = y;
             Z = z;
         }
+        public PlanetModel(int x, int y, int z)
+        {
+            Name = "Empty Space";
+            Description = "There is nothing noteworthy here.";
+            X = x;
+            Y = y;
+            Z = z;
+        }
     }
 }

@@ -20,6 +20,8 @@
         font-size: initial;
         clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
         margin-bottom: calc(var(--m) - var(--s) * 0.2885);
+        text-align: center;
+        line-height: calc(var(--s) * 1.1547);
     }
 
     .containerMap::before {
@@ -37,3 +39,9 @@
     .containerMap div:nth-child(even) {
         background-color: green;
     }
+
+.centerText {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}

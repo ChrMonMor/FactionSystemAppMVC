@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FactionSystemApp.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
@@ -16,14 +17,21 @@ namespace FactionSystemApp.Controllers
 
         public IActionResult Index()
         {
-            List<Models.AssetModel> viewAssetList = GetAllAssetsFromAssetTable();
+            List<AssetModel> viewAssetList = GetAllAssetsFromAssetTable();
             ViewBag.assetList = viewAssetList;
             return View(viewAssetList);
         }
 
         public IActionResult Details(int id)
         {
-            Models.AssetModel assetDetail = new();
+            AssetModel assetDetail = GetTagsDetails(id);
+            ViewBag.assetDetails = assetDetail;
+            return View("Details", assetDetail);
+        }
+
+        private AssetModel GetTagsDetails(int id)
+        {
+            AssetModel assetDetail = new();
             string query = "select * From AssetTable where Id = " + id;
             try
             {
@@ -34,7 +42,7 @@ namespace FactionSystemApp.Controllers
                     SqlDataReader rdr = cmd.ExecuteReader();
                     while (rdr.Read())
                     {
-                        assetDetail = new Models.AssetModel(Convert.ToInt32(rdr[0]),
+                        assetDetail = new AssetModel(Convert.ToInt32(rdr[0]),
                                                             rdr[1].ToString(),
                                                             rdr[2].ToString(),
                                                             rdr[3].ToString(),
@@ -53,13 +61,14 @@ namespace FactionSystemApp.Controllers
             {
                 throw;
             }
-            return View("Details", assetDetail);
+            return assetDetail;
         }
 
+
         //Get all the static assets from the database and returns a list
-        public List<Models.AssetModel> GetAllAssetsFromAssetTable()
+        public List<AssetModel> GetAllAssetsFromAssetTable()
         {
-            List<Models.AssetModel> assets = new();
+            List<AssetModel> assets = new();
             string query = "select * From AssetTable";
             try
             {
@@ -70,7 +79,7 @@ namespace FactionSystemApp.Controllers
                     SqlDataReader rdr = cmd.ExecuteReader();
                     while (rdr.Read())
                     {
-                        assets.Add(new Models.AssetModel(Convert.ToInt32(rdr[0]),
+                        assets.Add(new AssetModel(Convert.ToInt32(rdr[0]),
                                                          rdr[1].ToString(),
                                                          rdr[2].ToString(),
                                                          rdr[3].ToString(),
