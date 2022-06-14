@@ -29,7 +29,7 @@ namespace FactionSystemApp.Controllers
             return View("Details", assetDetail);
         }
 
-        private AssetModel GetTagsDetails(int id)
+        public static AssetModel GetTagsDetails(int id)
         {
             AssetModel assetDetail = new();
             string query = "select * From AssetTable where Id = " + id;
@@ -66,10 +66,10 @@ namespace FactionSystemApp.Controllers
 
 
         //Get all the static assets from the database and returns a list
-        public List<AssetModel> GetAllAssetsFromAssetTable()
+        public static List<AssetModel> GetAllAssetsFromAssetTable()
         {
             List<AssetModel> assets = new();
-            string query = "select * From AssetTable";
+            string query = "select * From AssetTable Order by Category";
             try
             {
                 using (SqlConnection con = new SqlConnection(Standards.Constring()))

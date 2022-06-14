@@ -14,17 +14,25 @@ namespace FactionSystemApp.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            List<FactionModel> viewList = GetAllFactionsFromList();
+            ViewBag.assetList = viewList;
+            return View(viewList);
         }
 
         public IActionResult CreateNewFaction()
         {
-            List<FactionModel> viewFactionList = GetAllFactionsFromList();
-            ViewBag.factionList = viewFactionList;
-            return View(viewFactionList);
+            List<TagModel> tagList = GetAllTagsFromTagTable();
+            List<AssetModel> assetList = Standards.GetAllAssetsFromAssetTableToNewFaction();
+            List<PlanetModel> planetList = MapController.GetAllPlanetsInMap(1);
+            ViewData["tagList"] = tagList;
+            ViewData["assetList"] = assetList;
+            ViewData["planetList"] = planetList;
+            return View("CreateNewFaction");
         }
 
-        private List<FactionModel> GetAllFactionsFromList()
+
+
+        private static List<FactionModel> GetAllFactionsFromList()
         {
             List<FactionModel> factions = new();
             string query = "select * From Factions";
@@ -72,7 +80,7 @@ namespace FactionSystemApp.Controllers
             return View("TagDetails", viewTagDetails);
         }
 
-        private TagModel GetTagsDetail(int id)
+        private static TagModel GetTagsDetail(int id)
         {
             TagModel tagDetail = new();
             string query = "select * From TagTable where Id = " + id;
@@ -100,7 +108,7 @@ namespace FactionSystemApp.Controllers
             return tagDetail;
         }
 
-        public List<TagModel> GetAllTagsFromTagTable()
+        public static List<TagModel> GetAllTagsFromTagTable()
         {
             List<TagModel> tags = new();
             string query = "select * From TagTable";

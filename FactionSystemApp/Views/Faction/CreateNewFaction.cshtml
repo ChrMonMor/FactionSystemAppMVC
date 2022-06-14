@@ -8,15 +8,10 @@
 
 <h4>Faction</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateNewFaction">
+<form asp-action="CreateNewFaction">
+    <div class="row">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -24,40 +19,76 @@
             </div>
             <div class="form-group">
                 <label asp-for="ForceRating" class="control-label"></label>
-                <input asp-for="ForceRating" class="form-control" />
+                <input asp-for="ForceRating" class="form-control"  min="0" max="8"/>
                 <span asp-validation-for="ForceRating" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CunningRating" class="control-label"></label>
-                <input asp-for="CunningRating" class="form-control" />
+                <input asp-for="CunningRating" class="form-control"  min="0" max="8"/>
                 <span asp-validation-for="CunningRating" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="WealthRating" class="control-label"></label>
-                <input asp-for="WealthRating" class="form-control" />
+                <input asp-for="WealthRating" class="form-control"  min="0" max="8"/>
                 <span asp-validation-for="WealthRating" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FacCred" class="control-label"></label>
-                <input asp-for="FacCred" class="form-control" />
-                <span asp-validation-for="FacCred" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EXP" class="control-label"></label>
-                <input asp-for="EXP" class="form-control" />
-                <span asp-validation-for="EXP" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Tag" class="control-label"></label>
-                <input asp-for="Tag" class="form-control" />
+                <select asp-for="Tag"  class="form-control" id="createFactionTagList" multiple>
+                    @foreach (var item in ViewData["tagList"] as List<TagModel>)
+                    {
+                        <option value="@item.Name">@item.Name</option>
+                    }
+                </select>
                 <span asp-validation-for="Tag" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+        <div class="col-lg-1">
+            <input type="button" id="btnpopu" value="Tag's Details" onclick="TagDetailsPopup();" />
+        </div>
+        <div class="col-md-3">
+             <div class="form-group">
+                <label asp-for="Assets" class="control-label"></label>
+                <select  class="form-control" id="createFactionAssetList" size="15" style="height: 100%;">
+                    @{string optionSpilt = "";}
+                    @foreach (var item in ViewData["assetList"] as List<AssetModel>)
+                    {
+                        if (optionSpilt != item.Category)
+                        {
+                            <optgroup label="@item.Category"></optgroup>
+                            optionSpilt = @item.Category;
+                        }
+                        <option value="@item.Id" id="@item.Category">@item.Name</option>
+                    }
+                </select>
             </div>
-        </form>
+            <div class="form-group">
+                <input type="button" id="AddAssetToNewFactionListButton" value="Add Asset" onclick="AddAssetToNewFactionList();" />
+                <input type="button" id="RemoveAssetToNewFactionListButton" value="Remove Asset" onclick="RemoveAssetToNewFactionList();" />
+            </div>
+        </div>
+        <div class="col">
+            <label for="selectedAssets" >Selected Assets</label>
+                <label asp-for="Assets" class="control-label"></label>
+                <select asp-for="Assets"  class="form-control" id="selectedFactionAssetList" size="15" style="height: 100%;">
+                    
+                </select>
+                <span asp-validation-for="Assets" class="text-danger"></span>
+        </div>
     </div>
-</div>
+    <div class="form-group">
+        <label asp-for="HQ" class="control-label"></label>
+            <select asp-for="HQ" class="form-control" id="createFactionAssetList" size="15" style="height: 100%;">
+                @foreach (var item in ViewData["planetList"] as List<AssetModel>)
+                {
+                    <option value="@item.Id" id="@item.Category">@item.Name</option>
+                }
+            </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
 
 <div>
     <a asp-action="Index">Back to List</a>
